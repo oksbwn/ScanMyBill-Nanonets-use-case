@@ -30,17 +30,19 @@
             <template>
               <a-row :gutter="[8, 40]" type="flex">
                 <a-col>
-                  <a-button shape="" icon="upload" @click="showModal" />
+                  <a-button icon="upload" @click="showFileUploadModal" />
                 </a-col>
-                <a-col> <a-button shape="" icon="camera" /></a-col>
+                <a-col>
+                  <a-button icon="camera" @click="showCameraModal"
+                /></a-col>
               </a-row>
               <a-row :gutter="[16, 40]">
                 <a-col class="gutter-row" :span="24">
                   <a-table :columns="columns" :data-source="data">
                     <a slot="name" slot-scope="text">{{ text }}</a>
                   </a-table>
-                </a-col></a-row
-              >
+                </a-col>
+              </a-row>
             </template>
           </a-layout-content>
           <a-layout-footer
@@ -54,26 +56,26 @@
       </a-layout>
     </template>
     <a-modal
-      title="Title"
-      :visible="visible"
-      :confirm-loading="confirmLoading"
-      @ok="handleOk"
-      @cancel="handleCancel"
+      title="Uplod File"
+      :visible="fileUploadModalVisibility"
+      @ok="fileUploadModalHandle"
+      @cancel="fileUploadModalHandle"
     >
-      <p>{{ ModalText }}</p>
+      <p></p>
     </a-modal>
-     <a-modal
-      title="Title"
+    <a-modal
+      title="Take Picture"
       :visible="camereModalVisibility"
-      :confirm-loading="confirmLoading"
-      @ok="handleOk"
-      @cancel="handleCancel"
+      @ok="cameraModalHandle"
+      @cancel="cameraModalHandle"
+      width="250px"
     >
-      <p>{{ ModalText }}</p>
+      <Camera />
     </a-modal>
   </div>
 </template>
 <script>
+import Camera from "./components/Camera.vue";
 const columns = [
   {
     title: "Sl.No",
@@ -99,30 +101,28 @@ const data = [];
 
 export default {
   name: "App",
-  components: {},
+  components: { Camera },
   data() {
     return {
-      visible: false,
+      fileUploadModalVisibility: false,
+      camereModalVisibility: false,
       data,
       collapsed: true,
       columns,
     };
   },
   methods: {
-    showModal() {
-      this.visible = true;
+    showCameraModal() {
+      this.camereModalVisibility = true;
     },
-    handleOk() {
-      this.ModalText = "The modal will be closed after two seconds";
-      this.confirmLoading = true;
-      setTimeout(() => {
-        this.visible = false;
-        this.confirmLoading = false;
-      }, 2000);
+    showFileUploadModal() {
+      this.fileUploadModalVisibility = true;
     },
-    handleCancel() {
-      console.log("Clicked cancel button");
-      this.visible = false;
+    cameraModalHandle() {
+      this.camereModalVisibility = false;
+    },
+    fileUploadModalHandle() {
+      this.fileUploadModalVisibility = false;
     },
   },
 };

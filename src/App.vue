@@ -39,7 +39,7 @@
               </a-row>
               <a-row :gutter="[16, 40]">
                 <a-col class="gutter-row" :span="24">
-                  <a-table :columns="columns" :data-source="data_">
+                  <a-table :columns="columns" :data-source="data_" rowKey="uid">
                     <a slot="name" slot-scope="text">{{ text }}</a>
                   </a-table>
                 </a-col>

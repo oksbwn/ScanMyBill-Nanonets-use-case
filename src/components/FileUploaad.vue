@@ -16,6 +16,7 @@
 </template>
 <script>
 import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 export default {
   data() {
     return {
@@ -72,6 +73,7 @@ export default {
             data.prediction.map((item) => {
               temp[item.label] = item.ocr_text;
             });
+            temp.uid = uuidv4();
             this.$store.dispatch("setBill", temp);
           }
           this.$message.info("Recognition sucessfull.");

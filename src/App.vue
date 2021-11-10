@@ -30,15 +30,16 @@
             <template>
               <a-row :gutter="[8, 40]" type="flex">
                 <a-col>
-                  <a-button icon="upload" @click="showFileUploadModal" />
+                  <file-upload />
                 </a-col>
                 <a-col>
                   <a-button icon="camera" @click="showCameraModal"
                 /></a-col>
+                <a-col> <a-button icon="reload" @click="loadData" /></a-col>
               </a-row>
               <a-row :gutter="[16, 40]">
                 <a-col class="gutter-row" :span="24">
-                  <a-table :columns="columns" :data-source="data">
+                  <a-table :columns="columns" :data-source="data_">
                     <a slot="name" slot-scope="text">{{ text }}</a>
                   </a-table>
                 </a-col>
@@ -47,10 +48,24 @@
           </a-layout-content>
           <a-layout-footer
             :style="{
-              maxHeight: '3vh',
+              maxHeight: '4vh',
             }"
           >
-            Hello
+            <a href="https://github.com/oksbwn/ScanMyBill-Nanonets-use-case"
+              ><a-icon
+                type="github"
+                :style="{ fontSize: '16px', color: '#08c', margin: '5px' }"
+            /></a>
+            <a href="https://twitter.com/wglabz"
+              ><a-icon
+                type="twitter"
+                :style="{ fontSize: '16px', color: '#08c', margin: '5px' }"
+            /></a>
+            <a href="https://linkedin.com/in/geekybikash"
+              ><a-icon
+                type="linkedin"
+                :style="{ fontSize: '16px', color: '#08c', margin: '5px' }"
+            /></a>
           </a-layout-footer>
         </a-layout>
       </a-layout>
@@ -75,38 +90,43 @@
   </div>
 </template>
 <script>
+import FileUpload from "./components/FileUploaad.vue";
 import Camera from "./components/Camera.vue";
 const columns = [
   {
-    title: "Sl.No",
-    dataIndex: "name",
-    key: "name",
-    scopedSlots: { customRender: "name" },
-  },
-  {
-    title: "Vendor",
-    dataIndex: "age",
-    key: "age",
-    width: 80,
-  },
-  {
     title: "Date",
-    dataIndex: "address",
-    key: "address 1",
+    dataIndex: "Date",
+    key: "Date",
+    width: 120,
+  },
+  {
+    title: "Merchant",
+    dataIndex: "Merchant_Name",
+    key: "Merchant_Name",
     ellipsis: true,
+  },
+  {
+    title: "Tax",
+    dataIndex: "Tax_Amount",
+    width: 120,
+    key: "Tax_Amount",
+  },
+  {
+    title: "Total",
+    dataIndex: "Total_Amount",
+    width: 120,
+    key: "Total_Amount",
   },
 ];
 
-const data = [];
-
 export default {
   name: "App",
-  components: { Camera },
+  components: { Camera, FileUpload },
   data() {
     return {
       fileUploadModalVisibility: false,
       camereModalVisibility: false,
-      data,
+      data_: [],
       collapsed: true,
       columns,
     };
@@ -123,6 +143,10 @@ export default {
     },
     fileUploadModalHandle() {
       this.fileUploadModalVisibility = false;
+    },
+    loadData() {
+      this.data_ = this.$store.state.bills;
+      console.log(this.$store.state.bills);
     },
   },
 };

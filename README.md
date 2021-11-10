@@ -1,5 +1,7 @@
 # scanmybills
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Project setup
 ```
 npm install

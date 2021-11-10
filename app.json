@@ -1,0 +1,7 @@
+{
+  "name": "ScanMyBill: Nanonets use case",
+  "description": "A simple project with VueJS and Nanonets.ai to scan purchase bills.",
+  "repository": "https://github.com/oksbwn/ScanMyBill-Nanonets-use-case",
+  "logo": "https://nanonets.com/media/logo2.png",
+  "keywords": ["node", "express", "static"]
+}

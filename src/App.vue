@@ -56,7 +56,7 @@
                 type="github"
                 :style="{ fontSize: '16px', color: '#08c', margin: '5px' }"
             /></a>
-            <a href="https://twitter.com/wglabz"
+            <a href="https://twitter.com/geekybikash"
               ><a-icon
                 type="twitter"
                 :style="{ fontSize: '16px', color: '#08c', margin: '5px' }"
